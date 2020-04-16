@@ -64,4 +64,4 @@ if __name__ == '__main__':
 
 	for num, link in enumerate(string2, start=1):
 		if link in a:
-			print(link, string2[num])
+			print(link, string2[num], a.index(link))
