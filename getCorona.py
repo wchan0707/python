@@ -29,25 +29,35 @@ if __name__ == '__main__':
 
 	options = Options()
 
-	options.set_headless(True)
+	options.set_headless(False)		#True: 画面表示なし
 
 	#Chromeを起動
 	driver = webdriver.Chrome(chrome_options=options)
 
-	for k in range(50, 100):
+	#for k in range(50, 100):		#50～100までのデータを収集する
+	for k in range(3-1, -1, -1):	#3日前から本日までのデータを収集する
 		#URLを開く
 		driver.get(url)
 		time.sleep(3)
 		print('Please wait 3sec...', k, '回目')
 
-		#開始日を押す
-		element = driver.find_element_by_xpath('//*[@id="Range_Date"]/a[1]')
+			#開始日をクリックする
+			#element = driver.find_element_by_css_selector('#Range_Date > a.startday')
+			#element.click()
+
+			#スライダーを右に移動して日付を進める
+			#element = driver.find_element_by_css_selector('#Range_Date > input[type=range]')
+			#for i in range(k):
+			#	element.send_keys(Keys.RIGHT)
+
+		#終了日をクリックする
+		element = driver.find_element_by_css_selector('#Range_Date > a.endday')
 		element.click()
 
-		#スライダーを移動して日付を進める
-		element = driver.find_element_by_xpath('//*[@id="Range_Date"]/input')
+		#スライダーを左に移動して日付を戻す
+		element = driver.find_element_by_css_selector('#Range_Date > input[type=range]')
 		for i in range(k):
-			element.send_keys(Keys.RIGHT)
+			element.send_keys(Keys.LEFT)
 
 		data = driver.page_source.encode('utf-8')
 
