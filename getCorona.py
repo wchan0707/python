@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
 	#for k in range(50, 100):		#50～100までのデータを収集する
 	#for k in range(3-1, -1, -1):	#3日前から本日までのデータを収集する
-	for k in range(0, -1, -1):		#今日一日のデータを収集する
+	for k in range(1-1, -1, -1):	#今日一日のデータを収集する
 		#URLを開く
 		driver.get(url)
 		time.sleep(3)
