@@ -11,13 +11,13 @@ if __name__ == '__main__':
 	import csv
 	import os
 
-	# URLを設定する   yahoo!  finance アップル
-	url = "https://stocks.finance.yahoo.co.jp/us/detail/AAPL"
+	# URLを設定する   yahoo!  finance 日経平均株価
+	url = "https://finance.yahoo.co.jp/quote/%5EDJI"
 
 	# ファイル名を設定する
 	today = datetime.date.today()
-	dbgfile = "Stock" + str(today.year) + ".debug.csv"
-	csvfile = "Stock" + str(today.year) + ".csv"
+	dbgfile = "NYD" + str(today.year) + ".debug.csv"
+	csvfile = "NYD" + str(today.year) + ".csv"
 
 	# オプションを設定する
 	options = Options()
@@ -36,28 +36,17 @@ if __name__ == '__main__':
 
 	# パラメータを収集する
 	tbls= [
-		 ['市場', 			'.stockMainTabName']
-		,['業種',			'.category']
-		,['銘柄コード',		'.stocksInfo > dt']
-		,['銘柄名',			'h1']
-		,['日付',			'.yjSb > span']
-		,['日時',			'.real']
-		,['株価',			'.stoksPrice:nth-child(3)']
-		,['前日比',			'.icoUpGreen']
-		,['前日終値',		'.innerDate > .lineFi:nth-child(1) strong']
-		,['始値',			'.innerDate > .lineFi:nth-child(2) strong']
-		,['高値',			'.innerDate > .lineFi:nth-child(3) strong']
-		,['安値',			'.innerDate > .lineFi:nth-child(4) strong']
-		,['出来高',			'.innerDate > .lineFi:nth-child(5) strong']
-		,['売買代金',		'.innerDate > .lineFi:nth-child(6) strong']
-		,['時価総額',		'.yjMS:nth-child(1) strong']
-		,['発行済株式数',	'.yjMS:nth-child(2) > .tseDtlDelay strong']
-		,['PER',			'.yjMS:nth-child(3) strong']
-		,['PBR',			'.yjMS:nth-child(4) strong']
-		,['EPS',			'.yjMS:nth-child(5) strong']
-		,['BPS',			'.yjMS:nth-child(6) strong']
-		,['52週高値',		'.lineFi:nth-child(7) strong']
-		,['52週安値',		'.lineFi:nth-child(8) strong']
+		 ['市場', 			'.Nv8MV3cw']
+		,['銘柄名',			'.Pz3gXPTn']
+		,['株価',			'.wlbmIy9W > .\_3BGK5SVf']
+		,['前日比',			'.St6PBOuj .\_3BGK5SVf']
+		,['前日終値',		'.\_1fLThPxD:nth-child(1) .\_3BGK5SVf']
+		,['始値',			'.\_1fLThPxD:nth-child(2) .\_3BGK5SVf']
+		,['高値',			'.\_1fLThPxD:nth-child(3) .\_3BGK5SVf']
+		,['安値',			'.\_1fLThPxD:nth-child(4) .\_3BGK5SVf']
+		,['出来高',			'.\_1fLThPxD:nth-child(5) .\_3BGK5SVf']
+		,['52週高値',		'.\_1fLThPxD:nth-child(6) .\_3BGK5SVf']
+		,['52週安値',		'.\_1fLThPxD:nth-child(7) .\_3BGK5SVf']
 	]
 
 	h = list()			# ヘッダー行
@@ -67,8 +56,6 @@ if __name__ == '__main__':
 		params = doc.select(tbl[1])
 		if params:
 			text= params[0].text
-			if tbl[0]=='PER' or tbl[0]=='PBR'or tbl[0]=='EPS' or tbl[0]=='BPS':
-				 text= text.replace('(連)', '')
 			print(tbl[0], '[[[', text, ']]]')
 			h.append(tbl[0])
 			d.append(text)
